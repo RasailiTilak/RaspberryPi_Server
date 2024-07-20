@@ -1,6 +1,6 @@
-##SSH SETUP
+# SSH SETUP
 
-# ON UBUNTU SEREVER
+## ON UBUNTU SEREVER
 
 - sudo apt update && sudo apt upgrade -y
 - sudo apt install openssh-server
@@ -11,7 +11,7 @@
 - sudo cp ./sshd_config ./sshd_config.original
 - ls
 
-# ON ANOTHER DEVICE 
+## ON ANOTHER DEVICE 
 - ssh server@piserver
 - ssh your_name@server_ip_address
 	- yes
@@ -29,8 +29,8 @@
 
 
 
-##NGINX SETUP
-#INSTALLATION
+# NGINX SETUP
+## INSTALLATION
 - sudo apt-get update
 - sudo apt-get install nginx
 - sudo systemctl start nginx
@@ -38,7 +38,7 @@
 - sudo ufw allow 'Nginx HTTP'
  ** check with your ip address**
 
-#BASIC CONFIGURATION OF THE NGINX
+## BASIC CONFIGURATION OF THE NGINX
 
 - sudo nano /etc/nginx/sites-available/default
  server {
@@ -59,8 +59,8 @@
 - sudo nginx -t
 - sudo systemctl reload nginx
 
-## MQTT BROKER SETUP
-# BASIC INSTALLATION
+# MQTT BROKER SETUP
+## BASIC INSTALLATION
 - sudo apt-get update
 - sudo apt-get install mosquitto mosquitto-clients
 - sudo systemctl start mosquitto
@@ -70,7 +70,7 @@
 
 
 
-# MQTT CONFIGURATION
+## MQTT CONFIGURATION
 - sudo nano /etc/mosquitto/mosquitto.conf
 	listener 1883
 	allow_anonymous true
@@ -78,13 +78,13 @@
 
 
 
-# VERIFICATION
+## VERIFICATION
 - sudo systemctl status mosquito
 - mosquitto_pub -h localhost -t test/topic -m "Hello MQTT"
 - mosquitto_sub -h localhost -t test/topic
 
 
-## INSTALL THE PHP 
+# INSTALL THE PHP 
 sudo apt update
 sudo apt install php
 php -v
@@ -97,14 +97,14 @@ sudo systemctl restart nginx
 sudo systemctl restart php-fpm
 
 
-## MARIADB SETUP
+# MARIADB SETUP
 sudo apt update
 sudo apt install mariadb-server
 sudo systemctl start mariadb
 sudo systemctl start mariadb
 sudo mysql_secure_installation
 mysql -V
-# Common Post-Installation Steps:
+## Common Post-Installation Steps:
 sudo mysql -u root -p
 CREATE DATABASE mydatabase;
 CREATE USER 'myuser'@'localhost' IDENTIFIED BY 'mypassword';
@@ -118,27 +118,27 @@ GRANT ALL PRIVILEGES ON *.* TO 'user'@'localhost' WITH GRANT OPTION;
 FLUSH PRIVILEGES;
 EXIT;
 
-# --------
+**--------**
 sudo mysql
 USE mysql;
 ALTER USER 'root'@'localhost' IDENTIFIED VIA mysql_native_password USING PASSWORD('server@555');
 FLUSH PRIVILEGES;
 EXIT;
 
-# ---------------------------- FILE TRANSFER -----------------------
-# IF NO PERMISSION CHANGE THE  PRESION TO THE USER
-#CHECK 
+**---------------------------- FILE TRANSFER -----------------------**
+## IF NO PERMISSION CHANGE THE  PRESION TO THE USER
+### CHECK 
 	cd /path/to/directory
 	ls -l
-#CHANGE THE PERMISSION
+### CHANGE THE PERMISSION
 sudo chmod -R 775 /var/www/html
 
 sudo chown -R server:server /var/www/html
 
 
-# -----------------------check site with ip ----------
-# if not work 
-#setup
+**-----------------------check site with ip ----------**
+### if not work 
+### setup
 sudo apt update
 sudo apt install nginx php-fpm
 
@@ -190,16 +190,16 @@ sudo ufw allow 'Nginx Full'
 
 
 
- #  ----------------------------------- if 502  error --bad  Gateway---
+ **----------------------------------- if 502  error --bad  Gateway---**
 
 dpkg --list | grep php
 
-# check and 
+### check and 
 sudo systemctl status php8.1-fpm
 sudo systemctl start php8.1-fpm
 sudo systemctl enable php8.1-fpm
 sudo systemctl enable php8.1-fpm
-# Verify PHP-FPM Configuration
+### Verify PHP-FPM Configuration
 sudo nano /etc/php/8.1/fpm/pool.d/www.conf
 #Look for the listen 
 
@@ -218,7 +218,7 @@ sudo systemctl restart nginx
 
 
 
-# --------------------if couldno't find the driver -----
+**--------------------if couldno't find the driver -----**
 
 sudo apt update
 sudo apt install php8.1-mysql
@@ -228,7 +228,7 @@ sudo systemctl restart nginx
 
 
  
-# ------------------------------------mqtt failed --- to connect how to fix 
+**------------------------------------mqtt failed --- to connect how to fix** 
 
 sudo nano /etc/mosquitto/mosquitto.conf
 listener 1883
@@ -237,7 +237,7 @@ protocol mqtt
 listener 9090
 protocol websockets
 
- # else if 
+ #### else if 
 
 
 sudo tail -f /var/log/mosquitto/mosquitto.log
@@ -266,34 +266,34 @@ sudo ufw allow 9090/tcp
 sudo ufw allow 1883/tcp
 sudo ufw reload
 
-###### no need below this 
+**no need below this** 
 sudo apt install websocat
 websocat ws://192.168.0.46:9090/mqtt
 
-# if not 
+### if not 
 wget https://github.com/vi/websocat/releases/latest/download/websocat.x86_64-unknown-linux-musl -O websocat
 chmod +x websocat
 
 
-# ------------------ local network with router------------
-## 
+**------------------ local network with router------------**
+ 
 sudo apt-get install network-manager
 sudo systemctl enable NetworkManager
 sudo systemctl start NetworkManager
 
  sudo nmcli device wifi list
 
-# ----------------- wifi off and enthernt enable----
+**----------------- wifi off and enthernt enable----**
 sudo ip link set wlan0 down
-# ethernet
+### ethernet
 sudo ip link set eth0 up
 
 sudo dhclient eth0
 ip addr
 
 
-# --------------------------------------   speed check ----------------
-# pir server
+**--------------------------------------   speed check ----------------**
+### pir server
 sudo apt update
 sudo apt install iperf3
 iperf3 -s
@@ -305,7 +305,7 @@ sudo lsof -i -P -n | grep LISTEN
 sudo ethtool -s eth0 speed 1000 duplex full autoneg on
 
 
-# windows
+### windows
 download iperf3 
 cd C:\path\to\iperf3\
 iperf3.exe -c <Raspberry_Pi_IP>

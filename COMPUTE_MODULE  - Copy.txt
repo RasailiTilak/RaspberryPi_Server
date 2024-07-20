@@ -1,0 +1,5 @@
+ # DOWNLOAD usbboot and go to the sys32
+ - setup 
+flash the firmware ubuntu server 64 bit
+
+- 
