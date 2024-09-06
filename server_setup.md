@@ -99,8 +99,11 @@ sudo apt install php-cli php-curl php-mbstring php-xml php-zip
 # RESTART SERVER
 ```
 sudo systemctl restart apache2  # Ubuntu/Debian
+
 sudo apt install php-fpm  # Ubuntu/Debian
 sudo systemctl restart nginx
+systemctl list-units --type=service | grep php
+
 sudo systemctl restart php-fpm
 ```
 
