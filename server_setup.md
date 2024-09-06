@@ -1,7 +1,7 @@
 # SSH SETUP
 
 ## ON UBUNTU SEREVER
-
+```
 - sudo apt update && sudo apt upgrade -y
 - sudo apt install openssh-server
 - sudo systemctl status ssh.service
@@ -10,8 +10,9 @@
 - ls -la
 - sudo cp ./sshd_config ./sshd_config.original
 - ls
-
+```
 ## ON ANOTHER DEVICE 
+```
 - ssh server@piserver
 - ssh your_name@server_ip_address
 	- yes
@@ -27,19 +28,20 @@
 - sudo systemctl restart ssh.service
 - exit
 
-
+```
 
 # NGINX SETUP
 ## INSTALLATION
+```
 - sudo apt-get update
 - sudo apt-get install nginx
 - sudo systemctl start nginx
 - sudo systemctl enable nginx
 - sudo ufw allow 'Nginx HTTP'
  ** check with your ip address**
-
+```
 ## BASIC CONFIGURATION OF THE NGINX
-
+```
 - sudo nano /etc/nginx/sites-available/default
  server {
     listen 80 default_server;
@@ -58,9 +60,10 @@
 
 - sudo nginx -t
 - sudo systemctl reload nginx
-
+```
 # MQTT BROKER SETUP
 ## BASIC INSTALLATION
+```
 - sudo apt-get update
 - sudo apt-get install mosquitto mosquitto-clients
 - sudo systemctl start mosquitto
@@ -68,49 +71,56 @@
 - sudo ufw allow 1883
 - sudo ufw allow 8883
 
-
+```
 
 ## MQTT CONFIGURATION
+```
 - sudo nano /etc/mosquitto/mosquitto.conf
 	listener 1883
 	allow_anonymous true
 - sudo systemctl restart mosquitto
 
-
+```
 
 ## VERIFICATION
+```
 - sudo systemctl status mosquito
 - mosquitto_pub -h localhost -t test/topic -m "Hello MQTT"
 - mosquitto_sub -h localhost -t test/topic
-
+```
 
 # INSTALL THE PHP 
+```
 sudo apt update
 sudo apt install php
 php -v
 sudo apt install php-cli php-curl php-mbstring php-xml php-zip
-
+```
 # RESTART SERVER
+```
 sudo systemctl restart apache2  # Ubuntu/Debian
 sudo apt install php-fpm  # Ubuntu/Debian
 sudo systemctl restart nginx
 sudo systemctl restart php-fpm
-
+```
 
 # MARIADB SETUP
+```
 sudo apt update
 sudo apt install mariadb-server
 sudo systemctl start mariadb
 sudo systemctl start mariadb
 sudo mysql_secure_installation
 mysql -V
+```
 ## Common Post-Installation Steps:
+```
 sudo mysql -u root -p
 CREATE DATABASE mydatabase;
 CREATE USER 'myuser'@'localhost' IDENTIFIED BY 'mypassword';
 GRANT ALL PRIVILEGES ON mydatabase.* TO 'myuser'@'localhost';
 FLUSH PRIVILEGES;
-#OR 
+####OR 
 sudo mysql -u root -p
 
 CREATE USER 'user'@'localhost' IDENTIFIED BY 'user@2024';
@@ -124,21 +134,23 @@ USE mysql;
 ALTER USER 'root'@'localhost' IDENTIFIED VIA mysql_native_password USING PASSWORD('server@555');
 FLUSH PRIVILEGES;
 EXIT;
-
+```
 **---------------------------- FILE TRANSFER -----------------------**
 ## IF NO PERMISSION CHANGE THE  PRESION TO THE USER
 ### CHECK 
 	cd /path/to/directory
 	ls -l
 ### CHANGE THE PERMISSION
+```
 sudo chmod -R 775 /var/www/html
 
 sudo chown -R server:server /var/www/html
 
-
+```
 **-----------------------check site with ip ----------**
 ### if not work 
 ### setup
+```
 sudo apt update
 sudo apt install nginx php-fpm
 
@@ -193,16 +205,20 @@ sudo ufw allow 'Nginx Full'
  **----------------------------------- if 502  error --bad  Gateway---**
 
 dpkg --list | grep php
-
+```
 ### check and 
+```
 sudo systemctl status php8.1-fpm
 sudo systemctl start php8.1-fpm
 sudo systemctl enable php8.1-fpm
 sudo systemctl enable php8.1-fpm
+```
 ### Verify PHP-FPM Configuration
+```
 sudo nano /etc/php/8.1/fpm/pool.d/www.conf
+```
 #Look for the listen 
-
+```
 listen = /run/php/php8.1-fpm.sock
 sudo nano /etc/nginx/sites-available/default
 
@@ -236,9 +252,9 @@ protocol mqtt
 
 listener 9090
 protocol websockets
-
+```
  #### else if 
-
+```
 
 sudo tail -f /var/log/mosquitto/mosquitto.log
 
@@ -269,8 +285,9 @@ sudo ufw reload
 **no need below this** 
 sudo apt install websocat
 websocat ws://192.168.0.46:9090/mqtt
-
+```
 ### if not 
+```
 wget https://github.com/vi/websocat/releases/latest/download/websocat.x86_64-unknown-linux-musl -O websocat
 chmod +x websocat
 
@@ -293,7 +310,9 @@ ip addr
 
 
 **--------------------------------------   speed check ----------------**
+```
 ### pir server
+```
 sudo apt update
 sudo apt install iperf3
 iperf3 -s
@@ -303,13 +322,14 @@ sudo lsof -i -P -n | grep LISTEN
 
 
 sudo ethtool -s eth0 speed 1000 duplex full autoneg on
-
+```
 
 ### windows
+```
 download iperf3 
 cd C:\path\to\iperf3\
 iperf3.exe -c <Raspberry_Pi_IP>
 
-
+```
 
 
