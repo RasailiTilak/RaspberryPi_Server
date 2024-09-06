@@ -349,7 +349,7 @@ sudo chmod 700 /var/www/html
 ```
 
 - give permission to the UPLOAD THE files to the serever from the  WinScp 
-```
+
 # for the php index file  i have to added 
 server {
     listen 80 default_server;
