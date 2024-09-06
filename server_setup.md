@@ -336,3 +336,16 @@ iperf3.exe -c <Raspberry_Pi_IP>
 ```
 
 
+
+
+
+
+# for the ssh disconnection error 
+- set the ufw rule to allow ssh
+-
+  ```
+sudo chown server1:server1 /var/www/html
+sudo chmod 700 /var/www/html
+```
+
+- give permission to the UPLOAD THE files to the serever from the  WinScp 
